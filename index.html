@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>श्री श्री 108 दुर्गा पूजा समिति बेरमा - जगदर | आय-व्यय पोर्टल</title>
+<style>
+:root{--red:#7b1720;--gold:#f3cf7a;--ink:#241b1b;--muted:#6b6262;--paper:#fffaf2;--line:#eadfce}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Devanagari",Arial,sans-serif;background:var(--paper);color:var(--ink)}
+header{background:linear-gradient(120deg,#5b1018,#941f2b);color:#fff;text-align:center;padding:24px 16px 30px}
+.hero-img{width:min(100%,760px);height:clamp(260px,48vw,510px);object-fit:cover;object-position:center 35%;border-radius:18px;border:3px solid #e8c66f;box-shadow:0 10px 28px #28080b66;display:block;margin:0 auto 20px}
+h1{font-size:clamp(1.4rem,4vw,2.5rem);line-height:1.35;margin:8px 0;color:#ffe4a3}header p{margin:5px 0;color:#fff4df}
+.pill{display:inline-block;margin-top:12px;border:1px solid #f3cf7a;border-radius:999px;padding:6px 13px;color:#ffe4a3;font-size:.9rem}
+main{max-width:1100px;margin:auto;padding:22px 16px 50px}.notice{background:#fff1cc;border:1px solid #ebd18a;padding:12px 14px;border-radius:12px;color:#624817;font-size:.92rem;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.card{background:white;border:1px solid var(--line);border-radius:15px;padding:17px;box-shadow:0 4px 12px #3a160b08}.label{color:var(--muted);font-size:.9rem}.amount{font-size:1.55rem;font-weight:750;margin-top:5px}
+section{margin-top:24px}h2{font-size:1.25rem;margin:0 0 13px}.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}input,select,button{font:inherit;padding:10px 12px;border-radius:10px;border:1px solid #d9cbb9;background:white;color:var(--ink)}input{flex:1;min-width:170px}button{background:var(--red);color:white;border-color:var(--red);cursor:pointer}button.secondary{background:white;color:var(--red)}.table-wrap{overflow-x:auto;background:white;border:1px solid var(--line);border-radius:14px}table{width:100%;border-collapse:collapse;min-width:650px}th,td{text-align:left;padding:12px;border-bottom:1px solid #f0e7da}th{background:#fff1e7;color:#67202a;font-size:.9rem}td small{color:var(--muted)}.empty{text-align:center;padding:28px;color:var(--muted)}.two{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.admin form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.admin form input,.admin form select{width:100%;min-width:0}.admin form button{grid-column:1/-1}.admin{border-top:4px solid var(--red)}.admin-note{color:var(--muted);font-size:.85rem;line-height:1.5}
+footer{text-align:center;padding:24px 14px;background:#3f1015;color:#f7e7cf;font-size:.9rem}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}.hero-img{height:360px}}@media(max-width:430px){.admin form{grid-template-columns:1fr}.admin form button{grid-column:auto}}
+</style>
+</head>
+<body>
+<header>
+  <img class="hero-img" src="assets/maa-durga.jpg" alt="श्री दुर्गा माता की प्रतिमा">
+  <h1>श्री श्री 108 दुर्गा पूजा समिति<br>बेरमा - जगदर</h1>
+  <p>वार्षिक आय-व्यय एवं पारदर्शिता पोर्टल</p>
+  <span class="pill">जय माता दी 🙏</span>
+</header>
+<main>
+  <div class="notice"><strong>डेमो पोर्टल:</strong> नीचे दिखाई गई राशि केवल इस ब्राउज़र में डेमो एंट्री से बनेगी। इसे सार्वजनिक या आधिकारिक हिसाब मानने से पहले समिति के सत्यापित रिकॉर्ड से मिलान करें। इस संस्करण में डेटा सर्वर पर सेव नहीं होता।</div>
+  <div class="stats">
+    <div class="card"><div class="label">कुल आय</div><div class="amount" id="income">₹0</div></div>
+    <div class="card"><div class="label">कुल खर्च</div><div class="amount" id="expense">₹0</div></div>
+    <div class="card"><div class="label">शेष राशि</div><div class="amount" id="balance">₹0</div></div>
+    <div class="card"><div class="label">रिकॉर्ड</div><div class="amount" id="count">0</div></div>
+  </div>
+  <section>
+    <h2>आय-व्यय का विवरण</h2>
+    <div class="filters">
+      <input id="search" placeholder="विवरण, श्रेणी या भुगतान पाने वाले को खोजें">
+      <select id="year"><option value="">सभी वर्ष</option></select>
+      <select id="month"><option value="">सभी महीने</option><option value="1">जनवरी</option><option value="2">फरवरी</option><option value="3">मार्च</option><option value="4">अप्रैल</option><option value="5">मई</option><option value="6">जून</option><option value="7">जुलाई</option><option value="8">अगस्त</option><option value="9">सितंबर</option><option value="10">अक्टूबर</option><option value="11">नवंबर</option><option value="12">दिसंबर</option></select>
+      <button class="secondary" onclick="downloadCSV()">CSV रिपोर्ट डाउनलोड</button>
+      <button class="secondary" onclick="window.print()">प्रिंट / PDF सेव करें</button>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th>तारीख</th><th>प्रकार</th><th>श्रेणी / विवरण</th><th>राशि</th><th>रसीद</th></tr></thead><tbody id="rows"><tr><td colspan="5" class="empty">अभी कोई रिकॉर्ड अपलोड नहीं हुआ है।</td></tr></tbody></table></div>
+  </section>
+  <section class="two">
+    <div class="card">
+      <h2>सालाना रिपोर्ट</h2>
+      <p class="label">चुने हुए साल की आय, खर्च और शेष राशि ऊपर अपने-आप अपडेट होती है। किसी भी राशि को आधिकारिक मानने से पहले मूल नोटबुक, डिजिटल रिकॉर्ड और रसीदों से सत्यापित करें।</p>
+      <button onclick="downloadCSV()">रिकॉर्ड एक्सपोर्ट करें</button>
+    </div>
+    <div class="card admin">
+      <h2>समिति सदस्य: डेमो एंट्री</h2>
+      <p class="admin-note">यह फॉर्म अभी पासवर्ड-सुरक्षित नहीं है और केवल डेमो के लिए है। लाइव करने से पहले वास्तविक Admin login, सर्वर डेटाबेस, बैकअप और अनुमति-आधारित एक्सेस जोड़ना आवश्यक है।</p>
+      <form id="entryForm">
+        <select id="type" required><option value="expense">खर्च</option><option value="income">आय / चंदा</option></select>
+        <input id="date" type="date" required>
+        <input id="category" placeholder="श्रेणी (जैसे सजावट)" required>
+        <input id="amount" type="number" min="0.01" step="0.01" placeholder="राशि ₹" required>
+        <input id="description" placeholder="विवरण / भुगतान पाने वाला" required>
+        <input id="receipt" type="url" placeholder="रसीद लिंक (वैकल्पिक)">
+        <button type="submit">डेमो रिकॉर्ड जोड़ें</button>
+      </form>
+    </div>
+  </section>
+</main>
+<footer>श्री श्री 108 दुर्गा पूजा समिति बेरमा - जगदर · आय-व्यय में पारदर्शिता, माँ दुर्गा की सेवा</footer>
+<script>
+const records=[]; const money=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2}).format(n);
+const year=document.getElementById('year'),month=document.getElementById('month'),search=document.getElementById('search');
+document.getElementById('date').value=new Date().toISOString().slice(0,10);
+function refresh(){
+ const years=[...new Set(records.map(r=>r.date.slice(0,4)))].sort().reverse(),old=year.value;
+ year.innerHTML='<option value="">सभी वर्ष</option>'+years.map(y=>`<option>${y}</option>`).join('');
+ if(years.includes(old))year.value=old;
+ const filtered=records.filter(r=>(!year.value||r.date.startsWith(year.value))&&(!month.value||Number(r.date.slice(5,7))===Number(month.value))&&(!search.value||[r.category,r.description,r.type].join(' ').toLowerCase().includes(search.value.toLowerCase())));
+ const inc=filtered.filter(r=>r.type==='income').reduce((a,r)=>a+r.amount,0),exp=filtered.filter(r=>r.type==='expense').reduce((a,r)=>a+r.amount,0);
+ document.getElementById('income').textContent=money(inc);document.getElementById('expense').textContent=money(exp);document.getElementById('balance').textContent=money(inc-exp);document.getElementById('count').textContent=filtered.length;
+ document.getElementById('rows').innerHTML=filtered.length?filtered.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(r=>`<tr><td>${r.date}</td><td>${r.type==='income'?'आय':'खर्च'}</td><td><strong>${esc(r.category)}</strong><br><small>${esc(r.description)}</small></td><td>${money(r.amount)}</td><td>${r.receipt?`<a href="${esc(r.receipt)}" target="_blank" rel="noopener">रसीद देखें</a>`:'—'}</td></tr>`).join(''):'<tr><td colspan="5" class="empty">इस फ़िल्टर में कोई रिकॉर्ड नहीं मिला।</td></tr>';
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+document.getElementById('entryForm').addEventListener('submit',e=>{e.preventDefault();records.push({type:document.getElementById('type').value,date:document.getElementById('date').value,category:document.getElementById('category').value.trim(),amount:Number(document.getElementById('amount').value),description:document.getElementById('description').value.trim(),receipt:document.getElementById('receipt').value.trim()});e.target.reset();document.getElementById('date').value=new Date().toISOString().slice(0,10);refresh();});
+[year,month,search].forEach(el=>el.addEventListener('input',refresh));
+function downloadCSV(){const filtered=records.filter(r=>(!year.value||r.date.startsWith(year.value))&&(!month.value||Number(r.date.slice(5,7))===Number(month.value)));const data=[['Date','Type','Category','Description','Amount INR','Receipt'],...filtered.map(r=>[r.date,r.type,r.category,r.description,r.amount,r.receipt])];const csv=data.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}));a.download='durga-samiti-report.csv';a.click();URL.revokeObjectURL(a.href);}
+refresh();
+</script>
+</body></html>
