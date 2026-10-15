@@ -5,14 +5,5 @@
   "news": [],
   "notices": [],
   "events": [],
-  "records": [
-    {
-      "type": "income",
-      "date": "2026-10-15",
-      "category": "चंदा",
-      "amount": 500,
-      "description": "उदाहरण रिकॉर्ड",
-      "receipt": ""
-    }
-  ]
+  "records": []
 }
