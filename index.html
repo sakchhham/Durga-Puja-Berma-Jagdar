@@ -205,7 +205,7 @@ function render() {
     : '<tr><td colspan="5" class="empty">कोई रिकॉर्ड नहीं मिला।</td></tr>';
 }
 
-function renderCards() {
+
   $("news").innerHTML = (publishedData.news || []).length
     ? publishedData.news.map(n => `<div class="card">
         <h3>${safeText(n.title)}</h3>
@@ -233,59 +233,43 @@ function renderCards() {
     : "अभी कोई फोटो प्रकाशित नहीं है।";
 }
 
-async function loadData() {
-  try {
-    const response = await fetch("./data.json", {cache:"no-store"});
-    if (!response.ok) throw new Error("data.json लोड नहीं हुआ");
-    publishedData = await response.json();
 
-    records = Array.isArray(publishedData.records)
-      ? publishedData.records.filter(r =>
-          r && /^\d{4}-\d{2}-\d{2}$/.test(String(r.date || "")) &&
-          ["income","expense"].includes(r.type)
-        ).map(r => ({
-          type:r.type, date:String(r.date),
-          category:String(r.category || ""),
-          amount:Number(r.amount) || 0,
-          description:String(r.description || ""),
-          receipt:String(r.receipt || "")
-        }))
-      : [];
+function renderCards() {
+  const news = Array.isArray(publishedData.news) ? publishedData.news : [];
+  const notices = Array.isArray(publishedData.notices) ? publishedData.notices : [];
+  const gallery = Array.isArray(publishedData.gallery) ? publishedData.gallery : [];
 
-    render();
-    renderCards();
-  } catch (error) {
-    $("rows").innerHTML =
-      '<tr><td colspan="5" class="empty">डेटा लोड नहीं हो सका। GitHub पर data.json और Pages deployment जाँचें।</td></tr>';
-    $("news").textContent = "डेटा उपलब्ध नहीं है।";
-    $("notices").textContent = "डेटा उपलब्ध नहीं है।";
-    $("gallery").textContent = "डेटा उपलब्ध नहीं है।";
-    console.error(error);
-  }
+  const newsSection = $("news").closest("section");
+  const noticeSection = $("notices").closest("section");
+  const gallerySection = $("gallery").closest("section");
+
+  newsSection.style.display = news.length ? "" : "none";
+  noticeSection.style.display = notices.length ? "" : "none";
+  gallerySection.style.display = gallery.length ? "" : "none";
+
+  $("news").innerHTML = news.map(n => `
+    <div class="card">
+      <h3>${safeText(n.title)}</h3>
+      <p>${safeText(n.description)}</p>
+      <small>${safeText(n.date)}</small>
+    </div>
+  `).join("");
+
+  $("notices").innerHTML = notices.map(n => `
+    <div class="card">
+      <h3>${safeText(n.title)}</h3>
+      <p>${safeText(n.description)}</p>
+      <small>${safeText(n.date)}</small>
+    </div>
+  `).join("");
+
+  $("gallery").innerHTML = gallery.map(g => {
+    const image = safeImagePath(g.image);
+    return `
+      <div class="card">
+        ${image ? `<img src="${safeText(image)}" alt="${safeText(g.title)}" style="width:100%;border-radius:8px" loading="lazy">` : ""}
+        <p>${safeText(g.title)}</p>
+      </div>
+    `;
+  }).join("");
 }
-
-function downloadCSV() {
-  const rows = records.map(r =>
-    [r.date, r.type, r.category, r.description, r.amount, r.receipt]
-  );
-  const data = [["Date","Type","Category","Description","Amount INR","Receipt"], ...rows];
-  const csv = data.map(row =>
-    row.map(v => '"' + String(v).replace(/"/g,'""') + '"').join(',')
-  ).join("\r\n");
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(new Blob(["\ufeff"+csv],
-    {type:"text/csv;charset=utf-8;"}));
-  a.download = "durga-samiti-report.csv";
-  a.click();
-  URL.revokeObjectURL(a.href);
-}
-
-$("search").addEventListener("input", render);
-$("year").addEventListener("change", render);
-$("month").addEventListener("change", render);
-$("csv").addEventListener("click", downloadCSV);
-
-loadData();
-</script>
-</body>
-</html>
